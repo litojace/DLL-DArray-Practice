@@ -4343,3 +4343,12 @@ body.resizing-panels
 .practice-confetti{position:absolute;inset:0;pointer-events:none}.practice-confetti i{position:absolute;top:-160px;width:8px;height:13px;animation:practice-confetti-fall 3s ease-in forwards;opacity:0}
 @keyframes practice-confetti-fall{0%{opacity:1;transform:translateY(0) rotate(0)}85%{opacity:1}100%{opacity:0;transform:translate(var(--drift),650px) rotate(700deg)}}
 @media(prefers-reduced-motion:reduce){.practice-confetti{display:none}}
+
+/* Temporary grading service status */
+.service-status-card{border:1px solid #e5d8b8;background:#fffdf7;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(20,33,61,.04)}
+.service-status-header{display:flex;align-items:flex-start;gap:12px;padding:18px;background:#fff8e8;border-bottom:1px solid #eee2c6}
+.service-status-icon{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:#f8e9bf;color:#947124;font-size:25px;line-height:1}
+.service-status-header h3{margin:0;color:#71551b;font-size:16px;line-height:1.4;font-weight:700}
+.service-status-header p{margin:5px 0 0;color:#89744c;font-size:13px;line-height:1.5}
+.service-status-body{padding:16px 18px}.service-saved{display:flex;align-items:center;gap:8px;font-size:14px;color:#3d765b;font-weight:600}
+.service-status-body p{margin:10px 0 0;font-size:14px;line-height:1.6;color:#60708a}

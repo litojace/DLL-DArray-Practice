@@ -47,9 +47,9 @@ You can also select **New > Blueprint** and use the included `render.yaml` for t
 
 ## How grading works
 
-The browser sends the chosen problem and student's code to `/run`. The server combines it with the class and test harness and sends it to Wandbox for C++17 compilation and execution. Both topics retain five test cases per problem. Compiler line numbers refer to the student's editor through `#line` directives.
+The browser sends the chosen problem and student's code to `/run`. The server combines it with the class and test harness and sends it to Compiler Explorer (Godbolt) for C++17 compilation and execution. Both topics retain five test cases per problem. Compiler line numbers refer to the student's editor through `#line` directives.
 
-Student code is sent to Wandbox; grading needs internet access and depends on that service's availability. CodeMirror is loaded from a CDN. On Render's free plan the service may sleep while idle, so the first request can take longer.
+Student code is sent to Compiler Explorer (Godbolt); grading needs internet access and depends on that service's availability. CodeMirror is loaded from a CDN. On Render's free plan the service may sleep while idle, so the first request can take longer.
 
 Edit the frontend in `public/`. Problem descriptions and displayed cases are in `public/script.js`; keep those consistent with the corresponding C++ test harnesses in `graders/` when changing exercises. The original Site is unaffected by this export.
 

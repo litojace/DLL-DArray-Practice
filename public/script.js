@@ -3143,7 +3143,7 @@ window.addEventListener('pagehide',persistWork);document.addEventListener('visib
 function showGradingUnavailable() {
  results.classList.remove('running-results');
  markTestsNotRun();
- results.innerHTML = '<div class="error-card"><h3>Grading service temporarily unavailable</h3><p>The online compiler could not run your tests after retrying. Your code and completion progress have been kept.</p><p>Please try Run Tests again shortly.</p></div>';
+ results.innerHTML = '<div class="error-card service-status-card" role="status"><div class="service-status-header"><span class="service-status-icon" aria-hidden="true">↻</span><div><h3>Grading temporarily unavailable</h3><p>The compiler service couldn’t run your tests.</p></div></div><div class="service-status-body"><div class="service-saved"><span aria-hidden="true">✓</span> Your code and progress are safe</div><p>Please wait a moment, then select <strong>Run Tests</strong> again.</p></div></div>';
  saveResultState();
  renderProblemProgress();
 }
