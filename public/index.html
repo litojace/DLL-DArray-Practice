@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>C++ CodeCheck Practice</title>
+    <meta name="description" content="Practice 29 C++ DArray and doubly linked list exercises with real compiler feedback.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314213d'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='white' font-size='20'%3ED%3C/text%3E%3C/svg%3E">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/codemirror.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/theme/material-darker.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- ===================================== -->
+    <!-- TOP BAR                               -->
+    <!-- ===================================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="cpp-logo">
+                C++
+            </div>
+
+            <div>
+
+                <div class="brand-title">
+                    C++2 Practice
+                </div>
+
+                <div class="brand-subtitle">
+                    Fall 2026 · By Jacen with 💗
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="workspace-title">
+            Practice Workspace
+        </div>
+
+
+        <fieldset class="topic-badge topic-switcher">
+            <legend>Practice topic</legend>
+            <div class="topic-options">
+                <label><input type="radio" name="practice-topic" value="darray" checked><span>DArray</span></label>
+                <label><input type="radio" name="practice-topic" value="dll"><span>Doubly Linked List</span></label>
+            </div>
+        </fieldset>
+
+    </header>
+
+
+
+    <!-- ===================================== -->
+    <!-- WORKSPACE                             -->
+    <!-- ===================================== -->
+
+    <main class="workspace">
+
+
+        <!-- ================================= -->
+        <!-- LEFT SIDE                         -->
+        <!-- ================================= -->
+
+        <section class="problem-panel">
+
+
+            <!-- NAVIGATION -->
+
+            <div class="problem-navigation">
+
+                <button
+                    id="previous"
+                    class="nav-button"
+                    type="button"
+                >
+                    ← Previous
+                </button>
+
+
+                <div
+                    id="problem-number"
+                    class="problem-number"
+                >
+                    Problem 1 of 9
+                </div>
+
+
+                <button
+                    id="next"
+                    class="nav-button"
+                    type="button"
+                >
+                    Next →
+                </button>
+
+            </div>
+
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-section">
+
+                <div class="progress-heading">
+
+                    <strong>
+                        Progress
+                    </strong>
+
+                    <span id="progress-count">
+                        0 / 9
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="problem-progress"
+                    class="problem-progress"
+                ></div>
+
+            </div>
+
+
+
+            <!-- SCROLLABLE PROBLEM AREA -->
+
+            <div class="problem-scroll">
+
+                <div class="problem-body">
+
+                    <div class="section-label">
+                        DARRAY PRACTICE
+                    </div>
+
+
+                    <h1 id="problem-title"></h1>
+
+
+                    <div
+                        id="problem-description"
+                        class="problem-description"
+                    ></div>
+
+
+
+                    <!-- DETAILS -->
+
+                    <div class="problem-details">
+
+                        <div class="detail-card">
+
+                            <div class="detail-label">
+                                PARAMETERS
+                            </div>
+
+                            <div
+                                id="parameters"
+                                class="detail-value"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="detail-card">
+
+                            <div class="detail-label">
+                                RETURN TYPE
+                            </div>
+
+                            <div
+                                id="return-type"
+                                class="detail-value"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ASSUMPTIONS -->
+
+                    <div class="assumption-box">
+
+                        <div class="assumption-title">
+                            ASSUMPTIONS
+                        </div>
+
+                        <div id="assumptions"></div>
+
+                    </div>
+
+                </div>
+
+<!-- ====================================== -->
+<!-- HINT SYSTEM                            -->
+<!-- ====================================== -->
+
+<div class="hint-section">
+
+    <div class="hint-header">
+
+        <div class="hint-heading">
+
+            <span class="hint-bulb">
+                💡
+            </span>
+
+            <span>
+                Need a hint?
+            </span>
+
+        </div>
+
+
+        <button
+            id="show-hint"
+            class="show-hint-button"
+            type="button"
+        >
+            Show Hint
+        </button>
+
+    </div>
+
+
+    <div
+        id="hint-card"
+        class="hint-card"
+        hidden
+    >
+
+        <div class="hint-card-top">
+
+            <div>
+
+                <div
+                    id="hint-level"
+                    class="hint-level"
+                >
+                    Hint 1 of 3
+                </div>
+
+                <div
+                    id="hint-type"
+                    class="hint-type"
+                >
+                    Concept
+                </div>
+
+            </div>
+
+
+            <button
+                id="hide-hint"
+                class="hide-hint-button"
+                type="button"
+                aria-label="Hide hints"
+                title="Hide hints"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="hint-text"
+            class="hint-text"
+        >
+        </div>
+
+
+        <div class="hint-footer">
+
+            <span class="hint-reminder">
+                Try solving it yourself before revealing more.
+            </span>
+
+
+            <button
+                id="next-hint"
+                class="next-hint-button"
+                type="button"
+            >
+                Next Hint →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+                <!-- CLASS REFERENCE -->
+
+                <details class="reference-section">
+                    <summary class="reference-heading"><strong>Class Reference</strong><span class="reference-toggle" aria-hidden="true"></span></summary>
+                    <pre class="reference-code"><code>#ifndef DARRAY_H
+#define DARRAY_H
+
+const int CAP = 50;
+
+class DArray
+{
+public:
+    DArray();
+    DArray(int newCapacity);
+
+    void addElement(int newElement);
+    int getNumOfElements() const;
+    void replaceElementAt(int newElement, int idx);
+    bool compareArrays(const DArray&amp; otherArray) const;
+    void printArray() const;
+
+    ~DArray();
+
+private:
+    int* a;
+    int capacity;
+    int numOfElements;
+};
+
+#endif</code></pre>
+
+                </details>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- RIGHT SIDE                        -->
+        <!-- ================================= -->
+
+        <section
+            id="coding-panel"
+            class="coding-panel"
+        >
+
+
+            <!-- EDITOR -->
+
+            <section
+                id="editor-section"
+                class="editor-section"
+            >
+
+                <div class="editor-header">
+
+                    <div>
+
+                        <div class="editor-title">
+                            Your Solution
+                        </div>
+
+                        <div class="editor-subtitle">
+                            Write the complete member-function definition. Run Tests sends your code to Wandbox for compilation.
+                        </div>
+
+                    </div>
+
+
+                    <span class="language-badge">
+                        C++17
+                    </span>
+
+                </div>
+
+
+                <div class="code-window">
+
+                    <textarea
+                        id="code"
+                        spellcheck="false"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="editor-toolbar">
+
+                    <div class="toolbar-actions">
+
+                        <button
+                            id="run"
+                            class="run-button"
+                            type="button"
+                        >
+                            <span class="run-icon">
+                                ▶
+                            </span>
+
+                            <span class="run-text">
+                                Run Tests
+                            </span>
+                        </button>
+
+
+                        <button
+                            id="reset"
+                            class="reset-button"
+                            type="button"
+                        >
+                            Reset Code
+                        </button>
+
+
+                        <span class="keyboard-hint">
+                            Ctrl / Cmd + Enter to Run
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- DRAGGABLE DIVIDER -->
+
+            <div
+                id="panel-resizer"
+                class="panel-resizer"
+                role="separator"
+                tabindex="0"
+            >
+
+                <div class="resizer-handle"></div>
+
+            </div>
+
+
+
+            <!-- RESULTS -->
+
+            <section
+                id="results-panel"
+                class="results-panel"
+            >
+
+                <div class="results-header">
+
+                    <div>
+
+                        <div class="results-title">
+                            Test Results
+                        </div>
+
+                        <div class="results-subtitle">
+                            Run your code to check your solution.
+                        </div>
+
+                    </div>
+
+
+                    <div class="score">
+
+                        <strong id="passed-count">
+                            0
+                        </strong>
+
+                        <span>
+                            /
+                        </span>
+
+                        <span id="total-count">
+                            3
+                        </span>
+
+                        <span>
+                            passed
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="test-progress-bar"
+                        class="test-progress-bar"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    id="test-indicators"
+                    class="test-indicators"
+                ></div>
+
+
+                <div
+                    id="results"
+                    class="results"
+                ></div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ===================================== -->
+    <!-- CODEMIRROR                            -->
+    <!-- ===================================== -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/codemirror.min.js"
+    ></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/mode/clike/clike.min.js"
+    ></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/addon/edit/closebrackets.min.js"
+    ></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/addon/edit/matchbrackets.min.js"
+    ></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.19/addon/selection/active-line.min.js"
+    ></script>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

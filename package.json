@@ -1,0 +1,12 @@
+{
+  "name": "cpp-practice",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DArray and Doubly Linked List practice with online C++ grading",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

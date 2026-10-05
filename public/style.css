@@ -1,0 +1,4338 @@
+/* ========================================= */
+/* BASE                                      */
+/* ========================================= */
+
+*
+{
+    box-sizing: border-box;
+}
+
+
+html,
+body
+{
+    margin: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        #f4f7fb;
+
+    color:
+        #14213d;
+}
+
+
+button
+{
+    font: inherit;
+}
+
+
+body.resizing-panels
+{
+    cursor: row-resize;
+    user-select: none;
+}
+
+
+
+/* ========================================= */
+/* TOP BAR                                   */
+/* ========================================= */
+
+.topbar
+{
+    height: 72px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding:
+        0
+        18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #101b3a,
+            #1e3263
+        );
+
+    color:
+        white;
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 4px 16px
+        rgba(15, 23, 42, 0.14);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+.brand
+{
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+
+.cpp-logo
+{
+    width: 44px;
+    height: 44px;
+
+    flex:
+        0
+        0
+        44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius:
+        11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7aa2ff,
+            #4f6fdc
+        );
+
+    box-shadow:
+        0 6px 16px
+        rgba(54, 89, 200, 0.32);
+
+    color:
+        white;
+
+    font-size:
+        14px;
+
+    font-weight:
+        800;
+}
+
+
+.brand-title
+{
+    font-size:
+        18px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.01em;
+}
+
+
+.brand-subtitle
+{
+    margin-top:
+        3px;
+
+    color:
+        #c5d0eb;
+
+    font-size:
+        12px;
+}
+
+
+.workspace-title
+{
+    color:
+        #dbe5ff;
+
+    font-size:
+        15px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.03em;
+}
+
+
+.topic-badge
+{
+    justify-self:
+        end;
+
+    padding:
+        9px
+        18px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.16);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(255, 255, 255, 0.10);
+
+    color:
+        white;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+}
+
+
+
+/* ========================================= */
+/* WORKSPACE                                 */
+/* ========================================= */
+
+.workspace
+{
+    width:
+        100%;
+
+    height:
+        calc(100vh - 72px);
+
+    min-height:
+        650px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(390px, 39%)
+        minmax(540px, 61%);
+
+    overflow:
+        hidden;
+
+    background:
+        #ffffff;
+}
+
+
+
+/* ========================================= */
+/* LEFT PANEL                                */
+/* ========================================= */
+
+.problem-panel
+{
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    background:
+        #f6f8fc;
+
+    border-right:
+        1px solid
+        #d9e1ee;
+}
+
+
+
+/* ========================================= */
+/* NAVIGATION                                */
+/* ========================================= */
+
+.problem-navigation
+{
+    display:
+        grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    padding:
+        16px;
+
+    background:
+        #f8faff;
+
+    border-bottom:
+        1px solid
+        #e2e8f2;
+}
+
+
+.nav-button
+{
+    min-height:
+        40px;
+
+    padding:
+        0
+        15px;
+
+    border:
+        1px solid
+        #d4ddeb;
+
+    border-radius:
+        8px;
+
+    background:
+        white;
+
+    color:
+        #172554;
+
+    font-size:
+        13px;
+
+    font-weight:
+        750;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 2px 6px
+        rgba(15, 23, 42, 0.04);
+
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.nav-button:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    border-color:
+        #7c9cff;
+
+    background:
+        #f7f9ff;
+
+    box-shadow:
+        0 5px 12px
+        rgba(59, 91, 180, 0.10);
+}
+
+
+.nav-button:active:not(:disabled)
+{
+    transform:
+        translateY(0);
+}
+
+
+.nav-button:disabled
+{
+    opacity:
+        0.4;
+
+    cursor:
+        not-allowed;
+
+    background:
+        #f5f7fa;
+}
+
+
+.problem-number
+{
+    text-align:
+        center;
+
+    color:
+        #374151;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+}
+
+
+
+/* ========================================= */
+/* PROBLEM PROGRESS                          */
+/* ========================================= */
+
+.progress-section
+{
+    padding:
+        16px
+        16px
+        18px;
+
+    background:
+        #f8faff;
+
+    border-bottom:
+        1px solid
+        #e2e8f2;
+}
+
+
+.progress-heading
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        12px;
+
+    color:
+        #172554;
+
+    font-size:
+        13px;
+}
+
+
+#progress-count
+{
+    color:
+        #64748b;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+}
+
+
+.problem-progress
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    flex-wrap:
+        wrap;
+}
+
+
+.problem-step
+{
+    width:
+        34px;
+
+    height:
+        34px;
+
+    flex:
+        0
+        0
+        34px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        1px solid
+        #d5deeb;
+
+    border-radius:
+        50%;
+
+    background:
+        white;
+
+    color:
+        #334155;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 2px 5px
+        rgba(15, 23, 42, 0.05);
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.problem-step:hover:not(:disabled)
+{
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #7393ee;
+
+    color:
+        #3455c5;
+}
+
+
+.problem-step:disabled
+{
+    cursor:
+        wait;
+}
+
+
+.problem-step.current
+{
+    border-color:
+        #5b7cf0;
+
+    color:
+        #3455c5;
+
+    background:
+        #eef3ff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(91, 124, 240, 0.12);
+}
+
+
+.problem-step.completed
+{
+    border-color:
+        #6bb27c;
+
+    background:
+        #6bb27c;
+
+    color:
+        white;
+
+    box-shadow:
+        0 3px 8px
+        rgba(60, 150, 83, 0.20);
+}
+
+
+.problem-step.completed:hover:not(:disabled)
+{
+    background:
+        #5ba36c;
+
+    border-color:
+        #5ba36c;
+}
+
+
+.problem-step.completed.current
+{
+    box-shadow:
+        0 0 0 3px
+        rgba(74, 163, 96, 0.18);
+}
+
+
+
+/* ========================================= */
+/* PROBLEM CONTENT                           */
+/* ========================================= */
+
+.problem-scroll
+{
+    min-height:
+        0;
+
+    flex:
+        1;
+
+    overflow-y:
+        auto;
+
+    scrollbar-width:
+        thin;
+
+    scrollbar-color:
+        #aebbd0
+        transparent;
+}
+
+
+.problem-body
+{
+    padding:
+        28px
+        16px
+        22px;
+}
+
+
+.section-label
+{
+    display:
+        inline-block;
+
+    margin-bottom:
+        10px;
+
+    padding:
+        5px
+        9px;
+
+    border-radius:
+        5px;
+
+    background:
+        #e8eeff;
+
+    color:
+        #4968c9;
+
+    font-size:
+        10px;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.10em;
+}
+
+
+.problem-body h1
+{
+    margin:
+        0
+        0
+        10px;
+
+    color:
+        #0f1f46;
+
+    font-size:
+        22px;
+
+    line-height:
+        1.25;
+}
+
+
+.problem-description
+{
+    color:
+        #46546d;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.75;
+}
+
+
+.problem-description b
+{
+    color:
+        #12244f;
+}
+
+
+.problem-details
+{
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:
+        10px;
+
+    margin-top:
+        18px;
+}
+
+
+.detail-card
+{
+    min-width:
+        0;
+
+    padding:
+        13px;
+
+    border:
+        1px solid
+        #d9e1ed;
+
+    border-radius:
+        9px;
+
+    background:
+        white;
+
+    box-shadow:
+        0 2px 7px
+        rgba(15, 23, 42, 0.035);
+}
+
+
+.detail-label
+{
+    margin-bottom:
+        5px;
+
+    color:
+        #73809a;
+
+    font-size:
+        10px;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.04em;
+}
+
+
+.detail-value
+{
+    color:
+        #16264c;
+
+    font-size:
+        13px;
+
+    font-weight:
+        750;
+}
+
+
+.assumption-box
+{
+    position:
+        relative;
+
+    margin-top:
+        12px;
+
+    padding:
+        13px
+        14px
+        13px
+        17px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        #d5deee;
+
+    border-radius:
+        9px;
+
+    background:
+        #f1f5ff;
+
+    color:
+        #53627c;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.55;
+}
+
+
+.assumption-box::before
+{
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    top:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        3px;
+
+    background:
+        #6e8df2;
+}
+
+
+.assumption-title
+{
+    margin-bottom:
+        5px;
+
+    color:
+        #20345f;
+
+    font-size:
+        10px;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.04em;
+}
+
+
+
+/* ========================================= */
+/* REFERENCE                                 */
+/* ========================================= */
+
+.reference-section
+{
+    margin:
+        0
+        16px
+        26px;
+}
+
+
+.reference-heading
+{
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    margin-bottom:
+        10px;
+
+    color:
+        #172554;
+
+    font-size:
+        13px;
+}
+
+
+.reference-subtitle
+{
+    margin-top:
+        4px;
+
+    color:
+        #6b7890;
+
+    font-size:
+        12px;
+
+    font-weight:
+        400;
+}
+
+
+.reference-badge
+{
+    flex:
+        0
+        0
+        auto;
+
+    color:
+        #71809a;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+}
+
+
+.reference-code
+{
+    margin:
+        0;
+
+    padding:
+        17px;
+
+    overflow-x:
+        auto;
+
+    border:
+        1px solid
+        #23355d;
+
+    border-radius:
+        9px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #16213d,
+            #101b33
+        );
+
+    color:
+        #f1f5ff;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.65;
+
+    box-shadow:
+        0 6px 18px
+        rgba(15, 23, 42, 0.12);
+
+    tab-size:
+        4;
+}
+
+
+
+/* ========================================= */
+/* RIGHT PANEL                               */
+/* ========================================= */
+
+.coding-panel
+{
+    min-width:
+        0;
+
+    min-height:
+        0;
+
+    height:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        white;
+}
+
+
+
+/* ========================================= */
+/* EDITOR                                    */
+/* ========================================= */
+
+.editor-section
+{
+    min-height:
+        250px;
+
+    height:
+        62%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        #202124;
+}
+
+
+.editor-header
+{
+    min-height:
+        72px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    padding:
+        12px
+        18px;
+
+    border-bottom:
+        1px solid
+        #dfe5ee;
+
+    background:
+        white;
+}
+
+
+.editor-title
+{
+    color:
+        #101f43;
+
+    font-size:
+        16px;
+
+    font-weight:
+        850;
+}
+
+
+.editor-subtitle
+{
+    margin-top:
+        4px;
+
+    color:
+        #7b879d;
+
+    font-size:
+        12px;
+}
+
+
+.language-badge
+{
+    padding:
+        5px
+        8px;
+
+    border-radius:
+        6px;
+
+    background:
+        #f0f3f8;
+
+    color:
+        #49607f;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+}
+
+
+.code-window
+{
+    min-height:
+        0;
+
+    flex:
+        1;
+
+    overflow:
+        hidden;
+
+    background:
+        #212121;
+}
+
+
+.CodeMirror
+{
+    width:
+        100%;
+
+    height:
+        100%;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.6;
+}
+
+
+.CodeMirror-gutters
+{
+    background:
+        #181818 !important;
+
+    border-right:
+        1px solid
+        #333333 !important;
+}
+
+
+.CodeMirror-linenumber
+{
+    color:
+        #737373 !important;
+}
+
+
+.editor-toolbar
+{
+    min-height:
+        60px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        10px
+        18px;
+
+    border-top:
+        1px solid
+        #dce3ed;
+
+    background:
+        #f8faff;
+}
+
+
+.toolbar-actions
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+}
+
+
+.run-button,
+.reset-button
+{
+    min-height:
+        39px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        0
+        15px;
+
+    border-radius:
+        8px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.15s ease;
+}
+
+
+.run-button
+{
+    min-width:
+        110px;
+
+    border:
+        1px solid
+        #6483ea;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7291f4,
+            #5575dd
+        );
+
+    color:
+        white;
+
+    box-shadow:
+        0 4px 10px
+        rgba(73, 104, 205, 0.24);
+}
+
+
+.run-button:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #6687ef,
+            #4969d2
+        );
+
+    box-shadow:
+        0 6px 14px
+        rgba(73, 104, 205, 0.30);
+}
+
+
+.run-button:active:not(:disabled)
+{
+    transform:
+        translateY(0);
+}
+
+
+.run-button:disabled
+{
+    cursor:
+        wait;
+
+    opacity:
+        0.88;
+}
+
+
+.run-icon
+{
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        13px;
+
+    height:
+        13px;
+
+    font-size:
+        10px;
+}
+
+
+.run-button.running .run-icon
+{
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.40);
+
+    border-top-color:
+        white;
+
+    border-radius:
+        50%;
+
+    font-size:
+        0;
+
+    animation:
+        runSpinner 0.7s
+        linear
+        infinite;
+}
+
+
+@keyframes runSpinner
+{
+    to
+    {
+        transform:
+            rotate(360deg);
+    }
+}
+
+
+.reset-button
+{
+    border:
+        1px solid
+        #ccd6e5;
+
+    background:
+        white;
+
+    color:
+        #172554;
+}
+
+
+.reset-button:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    border-color:
+        #9aabd0;
+
+    background:
+        #f8faff;
+}
+
+
+.reset-button:disabled
+{
+    cursor:
+        wait;
+
+    opacity:
+        0.55;
+
+    background:
+        #f5f7fa;
+}
+
+
+.keyboard-hint
+{
+    margin-left:
+        3px;
+
+    color:
+        #8b98ad;
+
+    font-size:
+        11px;
+}
+
+
+
+/* ========================================= */
+/* RESIZER                                   */
+/* ========================================= */
+
+.panel-resizer
+{
+    height:
+        13px;
+
+    flex:
+        0
+        0
+        13px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    cursor:
+        row-resize;
+
+    background:
+        #edf2f8;
+
+    border-top:
+        1px solid
+        #d9e1eb;
+
+    border-bottom:
+        1px solid
+        #d9e1eb;
+
+    touch-action:
+        none;
+}
+
+
+.resizer-handle
+{
+    width:
+        42px;
+
+    height:
+        3px;
+
+    border-radius:
+        999px;
+
+    background:
+        #aab8cc;
+
+    transition:
+        width 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.panel-resizer:hover .resizer-handle,
+.panel-resizer.dragging .resizer-handle
+{
+    width:
+        64px;
+
+    background:
+        #6f8de7;
+}
+
+
+
+/* ========================================= */
+/* RESULTS                                   */
+/* ========================================= */
+
+.results-panel
+{
+    min-height:
+        190px;
+
+    flex:
+        1;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    overflow:
+        hidden;
+
+    background:
+        #f7f9fc;
+}
+
+
+.results-header
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    padding:
+        14px
+        18px
+        11px;
+
+    background:
+        white;
+}
+
+
+.results-title
+{
+    color:
+        #101f43;
+
+    font-size:
+        16px;
+
+    font-weight:
+        850;
+}
+
+
+.results-subtitle
+{
+    margin-top:
+        3px;
+
+    color:
+        #8290a6;
+
+    font-size:
+        11px;
+}
+
+
+.score
+{
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    gap:
+        4px;
+
+    padding:
+        5px
+        9px;
+
+    border-radius:
+        6px;
+
+    background:
+        #f1f4f8;
+
+    color:
+        #64748b;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+}
+
+
+.score strong
+{
+    color:
+        #172554;
+
+    font-size:
+        13px;
+}
+
+
+.progress-track
+{
+    height:
+        4px;
+
+    margin:
+        0
+        18px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        999px;
+
+    background:
+        #e2e8f0;
+}
+
+
+.test-progress-bar
+{
+    width:
+        0%;
+
+    height:
+        100%;
+
+    border-radius:
+        inherit;
+
+    background:
+        #65ad76;
+
+    transition:
+        width 0.35s ease;
+}
+
+
+.test-indicators
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    min-height:
+        43px;
+
+    padding:
+        8px
+        18px;
+
+    border-bottom:
+        1px solid
+        #e3e8f0;
+
+    background:
+        white;
+}
+
+
+.test-dot
+{
+    width:
+        27px;
+
+    height:
+        27px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        #e9edf3;
+
+    color:
+        #6b778c;
+
+    font-size:
+        10px;
+
+    font-weight:
+        850;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.test-dot.pass
+{
+    background:
+        #dff4e4;
+
+    color:
+        #34814a;
+
+    animation:
+        testPop 0.28s ease;
+}
+
+
+.test-dot.fail
+{
+    background:
+        #fde5e5;
+
+    color:
+        #b83d3d;
+
+    animation:
+        testPop 0.28s ease;
+}
+
+
+@keyframes testPop
+{
+    0%
+    {
+        transform:
+            scale(0.8);
+    }
+
+    70%
+    {
+        transform:
+            scale(1.1);
+    }
+
+    100%
+    {
+        transform:
+            scale(1);
+    }
+}
+
+
+.results
+{
+    min-height:
+        0;
+
+    flex:
+        1;
+
+    overflow-y:
+        auto;
+
+    padding:
+        14px
+        18px
+        20px;
+}
+
+
+.empty-results
+{
+    min-height:
+        120px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    color:
+        #8b99ae;
+
+    text-align:
+        center;
+}
+
+
+.empty-results-icon
+{
+    margin-bottom:
+        8px;
+
+    color:
+        #9aabc3;
+
+    font-family:
+        monospace;
+
+    font-size:
+        27px;
+
+    font-weight:
+        800;
+}
+
+
+.empty-results strong
+{
+    color:
+        #59677d;
+
+    font-size:
+        13px;
+}
+
+
+.empty-results p
+{
+    margin:
+        4px
+        0
+        0;
+
+    font-size:
+        11px;
+}
+
+
+.running-results .empty-results-icon
+{
+    animation:
+        resultPulse 1.1s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes resultPulse
+{
+    0%,
+    100%
+    {
+        opacity:
+            0.4;
+
+        transform:
+            scale(0.95);
+    }
+
+    50%
+    {
+        opacity:
+            1;
+
+        transform:
+            scale(1.05);
+    }
+}
+
+
+.test-pass,
+.test-fail
+{
+    margin-bottom:
+        9px;
+
+    padding:
+        11px
+        13px;
+
+    border-radius:
+        8px;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.65;
+
+    animation:
+        resultEnter 0.25s ease
+        both;
+}
+
+
+@keyframes resultEnter
+{
+    from
+    {
+        opacity:
+            0;
+
+        transform:
+            translateY(5px);
+    }
+
+    to
+    {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+.test-pass
+{
+    border:
+        1px solid
+        #bde5c7;
+
+    background:
+        #f0faf3;
+
+    color:
+        #24683a;
+}
+
+
+.test-fail
+{
+    border:
+        1px solid
+        #f0c4c4;
+
+    background:
+        #fff4f4;
+
+    color:
+        #963737;
+}
+
+
+.result-detail
+{
+    margin-top:
+        4px;
+
+    color:
+        #526078;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.65;
+}
+
+
+.result-summary
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin-top:
+        13px;
+
+    padding:
+        11px
+        2px
+        0;
+
+    border-top:
+        1px solid
+        #dce3ed;
+
+    color:
+        #6b7890;
+
+    font-size:
+        12px;
+}
+
+
+.result-summary strong
+{
+    color:
+        #172554;
+}
+
+
+.compile-error
+{
+    padding:
+        12px;
+
+    border:
+        1px solid
+        #efc1c1;
+
+    border-radius:
+        8px;
+
+    background:
+        #fff3f3;
+
+    color:
+        #9d3535;
+
+    font-size:
+        12px;
+
+    animation:
+        resultEnter 0.25s ease;
+}
+
+
+.compile-error pre
+{
+    margin:
+        9px
+        0
+        0;
+
+    padding:
+        10px;
+
+    overflow-x:
+        auto;
+
+    border-radius:
+        6px;
+
+    background:
+        #172033;
+
+    color:
+        #f8fafc;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.55;
+
+    white-space:
+        pre-wrap;
+
+    word-break:
+        break-word;
+}
+
+
+
+/* ========================================= */
+/* TABLET                                    */
+/* ========================================= */
+
+@media (max-width: 950px)
+{
+    .workspace
+    {
+        height:
+            auto;
+
+        min-height:
+            0;
+
+        display:
+            block;
+
+        overflow:
+            visible;
+    }
+
+
+    .problem-panel
+    {
+        border-right:
+            none;
+
+        border-bottom:
+            1px solid
+            #d9e1ee;
+    }
+
+
+    .problem-scroll
+    {
+        max-height:
+            none;
+    }
+
+
+    .coding-panel
+    {
+        height:
+            850px;
+    }
+
+
+    .editor-section
+    {
+        height:
+            60%;
+    }
+}
+
+
+
+/* ========================================= */
+/* MOBILE                                    */
+/* ========================================= */
+
+@media (max-width: 650px)
+{
+    .topbar
+    {
+        height:
+            auto;
+
+        min-height:
+            72px;
+
+        grid-template-columns:
+            1fr
+            auto;
+
+        padding:
+            11px
+            13px;
+    }
+
+
+    .workspace-title
+    {
+        display:
+            none;
+    }
+
+
+    .brand-title
+    {
+        font-size:
+            15px;
+    }
+
+
+    .brand-subtitle
+    {
+        font-size:
+            10px;
+    }
+
+
+    .topic-badge
+    {
+        padding:
+            7px
+            11px;
+
+        font-size:
+            11px;
+    }
+
+
+    .problem-navigation
+    {
+        grid-template-columns:
+            auto
+            1fr
+            auto;
+
+        padding:
+            12px
+            10px;
+    }
+
+
+    .nav-button
+    {
+        padding:
+            0
+            10px;
+
+        font-size:
+            11px;
+    }
+
+
+    .problem-number
+    {
+        font-size:
+            11px;
+    }
+
+
+    .problem-details
+    {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .problem-body h1
+    {
+        font-size:
+            20px;
+    }
+
+
+    .coding-panel
+    {
+        height:
+            760px;
+    }
+
+
+    .editor-section
+    {
+        height:
+            58%;
+    }
+
+
+    .CodeMirror
+    {
+        font-size:
+            14px;
+    }
+
+
+    .toolbar-actions
+    {
+        width:
+            100%;
+
+        flex-wrap:
+            wrap;
+    }
+
+
+    .keyboard-hint
+    {
+        display:
+            none;
+    }
+}
+
+/* ========================================= */
+/* IMPROVED ERROR FEEDBACK                   */
+/* ========================================= */
+
+.error-card
+{
+    overflow:
+        hidden;
+
+    border-radius:
+        10px;
+
+    background:
+        white;
+
+    box-shadow:
+        0 4px 14px
+        rgba(15, 23, 42, 0.06);
+
+    animation:
+        errorCardEnter 0.28s ease
+        both;
+}
+
+
+@keyframes errorCardEnter
+{
+    from
+    {
+        opacity:
+            0;
+
+        transform:
+            translateY(6px);
+    }
+
+    to
+    {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+
+/* ========================================= */
+/* ERROR HEADER                              */
+/* ========================================= */
+
+.error-card-heading
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    padding:
+        14px
+        15px;
+
+    border-bottom:
+        1px solid
+        #f0d2d2;
+
+    background:
+        #fff7f7;
+}
+
+
+.error-icon
+{
+    width:
+        34px;
+
+    height:
+        34px;
+
+    flex:
+        0
+        0
+        34px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        #fde2e2;
+
+    color:
+        #b73d3d;
+
+    font-size:
+        18px;
+
+    font-weight:
+        900;
+}
+
+
+.error-title
+{
+    color:
+        #9d3535;
+
+    font-size:
+        14px;
+
+    font-weight:
+        850;
+}
+
+
+.error-subtitle
+{
+    margin-top:
+        2px;
+
+    color:
+        #7d6060;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+}
+
+
+
+/* ========================================= */
+/* MAIN ERROR MESSAGE                        */
+/* ========================================= */
+
+.error-main-message
+{
+    padding:
+        14px
+        15px;
+
+    border-bottom:
+        1px solid
+        #edf0f4;
+}
+
+
+.error-label
+{
+    margin-bottom:
+        7px;
+
+    color:
+        #7a879a;
+
+    font-size:
+        10px;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.04em;
+
+    text-transform:
+        uppercase;
+}
+
+
+.error-message-row
+{
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        8px;
+
+    flex-wrap:
+        wrap;
+}
+
+
+.error-message-row code
+{
+    color:
+        #9d3535;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.6;
+
+    word-break:
+        break-word;
+}
+
+
+.error-line-badge
+{
+    flex:
+        0
+        0
+        auto;
+
+    padding:
+        3px
+        7px;
+
+    border:
+        1px solid
+        #f0caca;
+
+    border-radius:
+        5px;
+
+    background:
+        #fff1f1;
+
+    color:
+        #a43c3c;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+}
+
+
+
+/* ========================================= */
+/* ERROR TIP                                 */
+/* ========================================= */
+
+.error-tip
+{
+    margin:
+        12px
+        15px;
+
+    padding:
+        11px
+        12px;
+
+    border:
+        1px solid
+        #d9e2f1;
+
+    border-radius:
+        8px;
+
+    background:
+        #f5f8fd;
+
+    color:
+        #53627a;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.6;
+}
+
+
+.error-tip-title
+{
+    margin-bottom:
+        3px;
+
+    color:
+        #293d68;
+
+    font-size:
+        10px;
+
+    font-weight:
+        850;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.04em;
+}
+
+
+
+/* ========================================= */
+/* FULL COMPILER OUTPUT                      */
+/* ========================================= */
+
+.error-details
+{
+    margin:
+        0
+        15px
+        15px;
+
+    border:
+        1px solid
+        #dce3ed;
+
+    border-radius:
+        8px;
+
+    background:
+        #fafbfd;
+}
+
+
+.error-details summary
+{
+    padding:
+        10px
+        12px;
+
+    color:
+        #4f607b;
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+    cursor:
+        pointer;
+
+    user-select:
+        none;
+}
+
+
+.error-details summary:hover
+{
+    color:
+        #3455c5;
+
+    background:
+        #f5f7fb;
+}
+
+
+.error-details[open] summary
+{
+    border-bottom:
+        1px solid
+        #dce3ed;
+}
+
+
+.error-details pre
+{
+    margin:
+        0;
+
+    padding:
+        12px;
+
+    overflow-x:
+        auto;
+
+    background:
+        #172033;
+
+    color:
+        #f8fafc;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.6;
+
+    white-space:
+        pre-wrap;
+
+    word-break:
+        break-word;
+}
+
+
+
+/* ========================================= */
+/* TESTS NOT RUN                             */
+/* ========================================= */
+
+.test-dot.not-run
+{
+    background:
+        #eef1f5;
+
+    color:
+        #98a3b3;
+
+    border:
+        1px solid
+        #dce2ea;
+
+    animation:
+        none;
+}
+
+
+
+/* ========================================= */
+/* DISABLED CONTROLS DURING TESTING          */
+/* ========================================= */
+
+.reset-button:disabled,
+.problem-step:disabled
+{
+    cursor:
+        not-allowed;
+
+    opacity:
+        0.5;
+
+    transform:
+        none;
+}
+
+
+.problem-step:disabled:hover
+{
+    transform:
+        none;
+
+    border-color:
+        #d5deeb;
+
+    color:
+        #334155;
+}
+
+
+.problem-step.completed:disabled
+{
+    opacity:
+        0.65;
+
+    background:
+        #6bb27c;
+
+    border-color:
+        #6bb27c;
+
+    color:
+        white;
+}
+
+/* ========================================= */
+/* PRACTICE PROGRESS STATES                  */
+/* ========================================= */
+
+
+/*
+    NOT ATTEMPTED
+
+    Uses the normal .problem-step styling
+    already defined earlier in the stylesheet.
+*/
+
+
+/* ========================================= */
+/* ATTEMPTED                                 */
+/* ========================================= */
+
+.problem-step.attempted
+{
+    position:
+        relative;
+
+    border-color:
+        #e3ad4d;
+
+    background:
+        #fff8e8;
+
+    color:
+        #a36a0b;
+
+    font-weight:
+        800;
+}
+
+
+.problem-step.attempted:hover:not(:disabled)
+{
+    border-color:
+        #d99a2b;
+
+    background:
+        #fff3d3;
+
+    color:
+        #895706;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/*
+    Small status dot.
+
+    This makes attempted problems easy to
+    distinguish without replacing the problem
+    number.
+*/
+
+.problem-step.attempted::after
+{
+    content:
+        "";
+
+    position:
+        absolute;
+
+    right:
+        2px;
+
+    bottom:
+        2px;
+
+    width:
+        5px;
+
+    height:
+        5px;
+
+    border-radius:
+        50%;
+
+    background:
+        #e3a43a;
+
+    box-shadow:
+        0 0 0 2px
+        #fff8e8;
+}
+
+
+
+/* ========================================= */
+/* CURRENT + ATTEMPTED                       */
+/* ========================================= */
+
+.problem-step.current.attempted
+{
+    border-color:
+        #6684e8;
+
+    background:
+        #eef2ff;
+
+    color:
+        #3e5bc2;
+}
+
+
+.problem-step.current.attempted::after
+{
+    background:
+        #e3a43a;
+
+    box-shadow:
+        0 0 0 2px
+        #eef2ff;
+}
+
+
+
+/* ========================================= */
+/* COMPLETED                                 */
+/* ========================================= */
+
+.problem-step.completed
+{
+    position:
+        relative;
+}
+
+
+
+/* ========================================= */
+/* JUST COMPLETED                            */
+/* ========================================= */
+
+.problem-step.just-completed
+{
+    animation:
+        problemCompleted
+        0.65s
+        ease;
+}
+
+
+@keyframes problemCompleted
+{
+    0%
+    {
+        transform:
+            scale(1);
+    }
+
+    30%
+    {
+        transform:
+            scale(1.22);
+    }
+
+    55%
+    {
+        transform:
+            scale(0.94);
+    }
+
+    75%
+    {
+        transform:
+            scale(1.08);
+    }
+
+    100%
+    {
+        transform:
+            scale(1);
+    }
+}
+
+
+
+/* ========================================= */
+/* COMPLETED CHECK APPEARANCE                */
+/* ========================================= */
+
+.problem-step.just-completed::before
+{
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        -5px;
+
+    border:
+        2px solid
+        rgba(75, 164, 99, 0.35);
+
+    border-radius:
+        50%;
+
+    animation:
+        completionRing
+        0.65s
+        ease-out;
+}
+
+
+@keyframes completionRing
+{
+    0%
+    {
+        opacity:
+            0;
+
+        transform:
+            scale(0.7);
+    }
+
+    35%
+    {
+        opacity:
+            1;
+    }
+
+    100%
+    {
+        opacity:
+            0;
+
+        transform:
+            scale(1.35);
+    }
+}
+
+
+
+/* ========================================= */
+/* PROGRESS TEXT                             */
+/* ========================================= */
+
+#progress-count
+{
+    white-space:
+        nowrap;
+
+    font-weight:
+        750;
+}
+
+/* ========================================= */
+/* FINAL UI POLISH                           */
+/* ========================================= */
+
+
+/* ========================================= */
+/* PROBLEM TRANSITION                        */
+/* ========================================= */
+
+.problem-changing .problem-scroll
+{
+    animation:
+        problemContentEnter
+        0.32s
+        ease
+        both;
+}
+
+
+@keyframes problemContentEnter
+{
+    from
+    {
+        opacity:
+            0;
+
+        transform:
+            translateY(5px);
+    }
+
+    to
+    {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+
+/* ========================================= */
+/* EDITOR TRANSITION                         */
+/* ========================================= */
+
+.problem-changing .CodeMirror
+{
+    animation:
+        editorEnter
+        0.28s
+        ease
+        both;
+}
+
+
+@keyframes editorEnter
+{
+    from
+    {
+        opacity:
+            0.88;
+    }
+
+    to
+    {
+        opacity:
+            1;
+    }
+}
+
+
+
+/* ========================================= */
+/* RUN BUTTON POLISH                         */
+/* ========================================= */
+
+.run-button
+{
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        background 0.16s ease,
+        opacity 0.16s ease;
+}
+
+
+.run-button:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 6px 14px
+        rgba(76, 101, 210, 0.24);
+}
+
+
+.run-button:active:not(:disabled)
+{
+    transform:
+        translateY(0)
+        scale(0.98);
+
+    box-shadow:
+        0 3px 8px
+        rgba(76, 101, 210, 0.18);
+}
+
+
+
+/* ========================================= */
+/* RESET BUTTON POLISH                       */
+/* ========================================= */
+
+.reset-button
+{
+    transition:
+        transform 0.16s ease,
+        background 0.16s ease,
+        border-color 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+
+.reset-button:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 4px 10px
+        rgba(15, 23, 42, 0.07);
+}
+
+
+.reset-button:active:not(:disabled)
+{
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+
+/* ========================================= */
+/* PREVIOUS / NEXT POLISH                    */
+/* ========================================= */
+
+#previous,
+#next
+{
+    transition:
+        transform 0.16s ease,
+        background 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        opacity 0.16s ease;
+}
+
+
+#previous:hover:not(:disabled),
+#next:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+}
+
+
+#previous:active:not(:disabled),
+#next:active:not(:disabled)
+{
+    transform:
+        translateY(0)
+        scale(0.97);
+}
+
+
+
+/* ========================================= */
+/* PROBLEM CIRCLE POLISH                     */
+/* ========================================= */
+
+.problem-step
+{
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+.problem-step:hover:not(:disabled)
+{
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 4px 9px
+        rgba(15, 23, 42, 0.08);
+}
+
+
+.problem-step.current
+{
+    box-shadow:
+        0 0 0 3px
+        rgba(85, 111, 222, 0.10);
+}
+
+
+
+/* ========================================= */
+/* EMPTY TEST RESULTS                        */
+/* ========================================= */
+
+.empty-results
+{
+    animation:
+        emptyResultsEnter
+        0.3s
+        ease
+        both;
+}
+
+
+@keyframes emptyResultsEnter
+{
+    from
+    {
+        opacity:
+            0;
+
+        transform:
+            translateY(4px);
+    }
+
+    to
+    {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+.empty-results-icon
+{
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.empty-results:hover .empty-results-icon
+{
+    transform:
+        translateY(-2px);
+}
+
+
+
+/* ========================================= */
+/* TEST RESULT CARD HOVER                    */
+/* ========================================= */
+
+.test-pass,
+.test-fail
+{
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+
+.test-pass:hover,
+.test-fail:hover
+{
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 5px 12px
+        rgba(15, 23, 42, 0.06);
+}
+
+
+
+/* ========================================= */
+/* TEST PROGRESS BAR                         */
+/* ========================================= */
+
+#test-progress-bar
+{
+    transition:
+        width 0.35s ease;
+}
+
+
+
+/* ========================================= */
+/* ALL TESTS PASSED                          */
+/* ========================================= */
+
+.result-summary.all-passed
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        16px;
+
+    padding:
+        13px
+        15px;
+
+    border:
+        1px solid
+        #cce7d3;
+
+    border-radius:
+        9px;
+
+    background:
+        #f3fbf5;
+
+    animation:
+        successSummaryEnter
+        0.4s
+        ease
+        both;
+}
+
+
+.success-summary-left
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+}
+
+
+.success-summary-icon
+{
+    width:
+        31px;
+
+    height:
+        31px;
+
+    flex:
+        0
+        0
+        31px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        #dcefe1;
+
+    color:
+        #318348;
+
+    font-size:
+        16px;
+
+    font-weight:
+        900;
+
+    animation:
+        successCheckEnter
+        0.55s
+        ease
+        both;
+}
+
+
+.success-summary-title
+{
+    display:
+        block;
+
+    color:
+        #28733c;
+
+    font-size:
+        12px;
+
+    font-weight:
+        850;
+}
+
+
+.success-summary-subtitle
+{
+    display:
+        block;
+
+    margin-top:
+        2px;
+
+    color:
+        #698071;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.45;
+}
+
+
+.result-summary.all-passed strong
+{
+    flex:
+        0
+        0
+        auto;
+
+    color:
+        #318348;
+
+    font-size:
+        14px;
+
+    font-weight:
+        900;
+}
+
+
+
+/* ========================================= */
+/* SUCCESS ANIMATIONS                        */
+/* ========================================= */
+
+@keyframes successSummaryEnter
+{
+    from
+    {
+        opacity:
+            0;
+
+        transform:
+            translateY(6px);
+    }
+
+    to
+    {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes successCheckEnter
+{
+    0%
+    {
+        opacity:
+            0;
+
+        transform:
+            scale(0.5)
+            rotate(-15deg);
+    }
+
+    55%
+    {
+        opacity:
+            1;
+
+        transform:
+            scale(1.14)
+            rotate(3deg);
+    }
+
+    100%
+    {
+        opacity:
+            1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+
+/* ========================================= */
+/* RESULT SUMMARY                            */
+/* ========================================= */
+
+.result-summary
+{
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+
+/* ========================================= */
+/* ACCESSIBILITY                             */
+/* ========================================= */
+
+@media (prefers-reduced-motion: reduce)
+{
+    .problem-changing .problem-scroll,
+    .problem-changing .CodeMirror,
+    .empty-results,
+    .result-summary.all-passed,
+    .success-summary-icon,
+    .problem-step.just-completed,
+    .problem-step.just-completed::before
+    {
+        animation:
+            none;
+    }
+
+
+    .run-button,
+    .reset-button,
+    #previous,
+    #next,
+    .problem-step,
+    .test-pass,
+    .test-fail,
+    #test-progress-bar
+    {
+        transition:
+            none;
+    }
+}
+
+/* ========================================= */
+/* BUTTON INTERACTION POLISH                 */
+/* ========================================= */
+
+
+/* Run Tests */
+
+.run-button
+{
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        opacity 0.16s ease;
+}
+
+
+.run-button:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 6px 14px
+        rgba(76, 101, 210, 0.24);
+}
+
+
+.run-button:active:not(:disabled)
+{
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+
+/* Reset Code */
+
+.reset-button
+{
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        background 0.16s ease;
+}
+
+
+.reset-button:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 4px 10px
+        rgba(15, 23, 42, 0.08);
+}
+
+
+.reset-button:active:not(:disabled)
+{
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+
+/* Previous / Next */
+
+#previous,
+#next
+{
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        opacity 0.16s ease;
+}
+
+
+#previous:hover:not(:disabled),
+#next:hover:not(:disabled)
+{
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 4px 9px
+        rgba(15, 23, 42, 0.08);
+}
+
+
+#previous:active:not(:disabled),
+#next:active:not(:disabled)
+{
+    transform:
+        translateY(0)
+        scale(0.97);
+}
+
+
+
+/* Problem-number circles */
+
+.problem-step
+{
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
+}
+
+
+.problem-step:hover:not(:disabled)
+{
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 4px 9px
+        rgba(15, 23, 42, 0.08);
+}
+
+
+.problem-step.current
+{
+    box-shadow:
+        0 0 0 3px
+        rgba(85, 111, 222, 0.10);
+}
+
+
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce)
+{
+    .run-button,
+    .reset-button,
+    #previous,
+    #next,
+    .problem-step
+    {
+        transition:
+            none;
+    }
+
+
+    .run-button:hover:not(:disabled),
+    .reset-button:hover:not(:disabled),
+    #previous:hover:not(:disabled),
+    #next:hover:not(:disabled),
+    .problem-step:hover:not(:disabled)
+    {
+        transform:
+            none;
+    }
+}
+
+/* ========================================= */
+/* HINT SYSTEM                               */
+/* ========================================= */
+
+.hint-section
+{
+    margin-top:
+        16px;
+
+    margin-bottom:
+        18px;
+}
+
+
+
+/* ========================================= */
+/* HINT HEADER                               */
+/* ========================================= */
+
+.hint-header
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+}
+
+
+.hint-heading
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    color:
+        #273654;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+}
+
+
+.hint-bulb
+{
+    font-size:
+        14px;
+}
+
+
+
+/* ========================================= */
+/* SHOW HINT BUTTON                          */
+/* ========================================= */
+
+.show-hint-button
+{
+    padding:
+        6px
+        10px;
+
+    border:
+        1px solid
+        #d8dfeb;
+
+    border-radius:
+        6px;
+
+    background:
+        white;
+
+    color:
+        #5369bd;
+
+    font-family:
+        inherit;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        transform 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+
+.show-hint-button:hover
+{
+    border-color:
+        #bfcaf0;
+
+    background:
+        #f5f7ff;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 3px 8px
+        rgba(50, 70, 140, 0.08);
+}
+
+
+.show-hint-button:active
+{
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+
+/* ========================================= */
+/* HINT CARD                                 */
+/* ========================================= */
+
+.hint-card
+{
+    margin-top:
+        10px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        #d8e0f1;
+
+    border-radius:
+        9px;
+
+    background:
+        #fbfcff;
+
+    box-shadow:
+        0 4px 12px
+        rgba(20, 36, 70, 0.05);
+}
+
+
+.hint-card[hidden]
+{
+    display:
+        none;
+}
+
+
+.hint-card.hint-enter
+{
+    animation:
+        hintCardEnter
+        0.25s
+        ease
+        both;
+}
+
+
+@keyframes hintCardEnter
+{
+    from
+    {
+        opacity:
+            0;
+
+        transform:
+            translateY(-4px);
+    }
+
+    to
+    {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+
+/* ========================================= */
+/* HINT CARD TOP                             */
+/* ========================================= */
+
+.hint-card-top
+{
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+
+    padding:
+        11px
+        12px;
+
+    border-bottom:
+        1px solid
+        #e4e9f2;
+
+    background:
+        #f4f6fd;
+}
+
+
+.hint-level
+{
+    color:
+        #66738a;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.05em;
+
+    text-transform:
+        uppercase;
+}
+
+
+.hint-type
+{
+    margin-top:
+        2px;
+
+    color:
+        #314a9a;
+
+    font-size:
+        14px;
+
+    font-weight:
+        850;
+}
+
+
+
+/* ========================================= */
+/* HIDE HINT BUTTON                          */
+/* ========================================= */
+
+.hide-hint-button
+{
+    width:
+        25px;
+
+    height:
+        25px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        0;
+
+    border-radius:
+        5px;
+
+    background:
+        transparent;
+
+    color:
+        #8792a5;
+
+    font-family:
+        inherit;
+
+    font-size:
+        18px;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.hide-hint-button:hover
+{
+    background:
+        #e7ebf5;
+
+    color:
+        #34415a;
+}
+
+
+
+/* ========================================= */
+/* HINT TEXT                                 */
+/* ========================================= */
+
+.hint-text
+{
+    padding:
+        13px
+        12px;
+
+    color:
+        #45546c;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.7;
+}
+
+
+.hint-text.hint-text-change
+{
+    animation:
+        hintTextChange
+        0.25s
+        ease
+        both;
+}
+
+
+@keyframes hintTextChange
+{
+    from
+    {
+        opacity:
+            0;
+
+        transform:
+            translateX(4px);
+    }
+
+    to
+    {
+        opacity:
+            1;
+
+        transform:
+            translateX(0);
+    }
+}
+
+
+
+/* ========================================= */
+/* HINT FOOTER                               */
+/* ========================================= */
+
+.hint-footer
+{
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+
+    padding:
+        9px
+        12px;
+
+    border-top:
+        1px solid
+        #e4e9f2;
+
+    background:
+        white;
+}
+
+
+.hint-reminder
+{
+    color:
+        #7f8897;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.4;
+}
+
+
+
+/* ========================================= */
+/* NEXT HINT BUTTON                          */
+/* ========================================= */
+
+.next-hint-button
+{
+    flex:
+        0
+        0
+        auto;
+
+    padding:
+        6px
+        9px;
+
+    border:
+        0;
+
+    border-radius:
+        6px;
+
+    background:
+        #edf1ff;
+
+    color:
+        #4660c1;
+
+    font-family:
+        inherit;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.next-hint-button:hover:not(:disabled)
+{
+    background:
+        #e1e7ff;
+
+    transform:
+        translateX(1px);
+}
+
+
+.next-hint-button:active:not(:disabled)
+{
+    transform:
+        translateX(0)
+        scale(0.98);
+}
+
+
+.next-hint-button:disabled
+{
+    background:
+        #f0f2f5;
+
+    color:
+        #a5adba;
+
+    cursor:
+        default;
+}
+
+
+
+/* ========================================= */
+/* REDUCED MOTION                            */
+/* ========================================= */
+
+@media (prefers-reduced-motion: reduce)
+{
+    .hint-card.hint-enter,
+    .hint-text.hint-text-change
+    {
+        animation:
+            none;
+    }
+
+
+    .show-hint-button,
+    .next-hint-button
+    {
+        transition:
+            none;
+    }
+}
+/* Offline editor fallback */
+.code-window > textarea { width: 100%; height: 100%; min-height: 250px; padding: 20px; resize: none; border: 0; background: #212121; color: #f1f5f9; font: 16px/1.6 Consolas, monospace; tab-size: 4; }
+
+.topic-badge {font-size:14px;} #topic-select {display:block;margin-top:5px;padding:7px;border-radius:5px;background:#14213d;color:white;border:1px solid #7893bc;font:inherit;max-width:100%;} .problem-progress {flex-wrap:wrap;}
+
+.topbar {height:auto;min-height:72px;} .topic-badge {max-width:100%;} @media(max-width:700px){.topbar {row-gap:10px;} #topic-select {font-size:14px;} }
+
+.problem-progress.dll-progress {display:grid;grid-template-columns:repeat(10,minmax(0,1fr));max-width:412px;margin-inline:auto;gap:8px;}
+.dll-progress .problem-step {width:100%;max-width:34px;height:auto;aspect-ratio:1;justify-self:center;}
+@media(max-width:400px){.problem-progress.dll-progress{gap:4px;}}
+
+.reference-section > summary {cursor:pointer;list-style:none;min-height:44px;margin-bottom:0;gap:12px;}
+.reference-section > summary::-webkit-details-marker {display:none;}
+.reference-section > summary:focus-visible {outline:2px solid #4660c1;outline-offset:5px;border-radius:4px;}
+.reference-toggle {font-size:14px;color:#4660c1;font-weight:600;}
+.reference-toggle::before {content:"Expand +";}
+.reference-section[open] .reference-toggle::before {content:"Collapse −";}
+.reference-section[open] > summary {margin-bottom:14px;}
+
+/* Practice controls */
+.editor-toolbar {padding:14px 18px;}
+.toolbar-actions {align-items:center;gap:12px;flex-wrap:wrap;}
+.run-button,.reset-button {display:inline-flex;align-items:center;justify-content:center;min-height:48px;min-width:136px;padding:12px 20px;font-size:16px;line-height:1.25;font-weight:700;border-radius:10px;text-align:center;}
+.run-text {display:flex;align-items:center;justify-content:center;line-height:1.25;}
+.run-icon {width:18px;height:18px;font-size:14px;line-height:1;flex-shrink:0;}
+.run-button {box-shadow:0 4px 12px rgba(73,104,205,.24);}
+.hint-heading {font-size:17px;line-height:1.4;gap:10px;align-items:center;}
+.hint-bulb {display:inline-flex;align-items:center;justify-content:center;font-size:28px;line-height:1;width:34px;height:34px;flex-shrink:0;}
+.show-hint-button,.next-hint-button {font-size:15px;min-height:40px;padding:9px 14px;line-height:1.3;}
+.reference-section > summary {transition:color .18s ease;}
+.reference-section > summary:hover {color:#4660c1;}
+.reference-toggle {font-size:15px;}
+@media(prefers-reduced-motion:reduce){.reference-section > summary{transition:none;}}
+
+/* Match hint and result typography to panel headings. */
+.hint-heading {font-size:16px;font-weight:850;gap:8px;}
+.hint-bulb {font-size:21px;width:26px;height:26px;}
+.show-hint-button {font-size:14px;min-height:36px;padding:8px 12px;}
+.score,.score strong,.score span {font-size:16px;line-height:1.3;}
+
+/* Compact practice actions and topic switcher. */
+.editor-toolbar {padding:12px 18px;}
+.run-button,.reset-button {min-height:44px;min-width:126px;padding:10px 18px;font-size:15px;border-radius:9px;}
+.run-icon {width:16px;height:16px;font-size:13px;}
+.topic-switcher {margin:0;padding:6px 8px 8px;min-width:0;}
+.topic-switcher legend {padding:0 5px;font-size:13px;font-weight:700;}
+.topic-options {display:flex;gap:3px;padding:3px;background:rgba(0,0,0,.18);border-radius:8px;}
+.topic-options label {position:relative;display:flex;cursor:pointer;}
+.topic-options input {position:absolute;width:1px;height:1px;opacity:0;}
+.topic-options span {display:flex;align-items:center;justify-content:center;min-height:36px;padding:7px 10px;border-radius:6px;font-size:14px;line-height:1.3;color:#dbe5ff;white-space:nowrap;transition:background .18s ease,color .18s ease,box-shadow .18s ease;}
+.topic-options input:checked + span {background:#7794ff;color:#101f43;box-shadow:0 2px 6px rgba(0,0,0,.16);}
+.topic-options input:focus-visible + span {outline:2px solid white;outline-offset:2px;}
+.topic-options input:disabled + span {opacity:.55;cursor:wait;}
+@media(max-width:450px){.topbar{grid-template-columns:1fr;gap:10px;}.topic-switcher{justify-self:start;}.topic-options span{min-height:36px;}}
+@media(prefers-reduced-motion:reduce){.topic-options span{transition:none;}}
+
+/* Slightly larger test card text. */
+.test-pass,.test-fail {font-size:14px;line-height:1.5;}
+.result-detail {font-size:13px;line-height:1.65;overflow-wrap:anywhere;}
+
+.brand-subtitle {font-size:13px;line-height:1.4;}
+@media(max-width:700px){.brand-subtitle{font-size:12px;}}
