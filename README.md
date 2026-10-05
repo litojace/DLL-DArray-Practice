@@ -56,3 +56,7 @@ Edit the frontend in `public/`. Problem descriptions and displayed cases are in 
 ## Student autosave
 
 Drafts, completion progress, hints, and the last selected topic/question save in localStorage on the same browser and website address. Clearing browser data removes them; they do not sync across devices or domains. A congratulations dialog with confetti appears once for each topic after all its questions are completed. Reduced-motion preferences disable confetti.
+
+## Teacher analytics
+
+Visit /teacher for a password-protected usage dashboard. Shared tracking requires Supabase and server environment variables; see ANALYTICS-SETUP.md. Without configuration the practice website remains usable.

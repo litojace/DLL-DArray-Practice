@@ -3149,3 +3149,30 @@ function showGradingUnavailable() {
 }
 // A connection failure also leaves previously earned completion intact.
 showServerError = function() { showGradingUnavailable(); };
+
+// Anonymous visits and topic completion totals. Never send code or names.
+let trackingBrowserId = null;
+try {
+ trackingBrowserId = localStorage.getItem('jacen-practice-browser-id');
+ if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(trackingBrowserId || '')) {
+  trackingBrowserId = crypto.randomUUID();
+  localStorage.setItem('jacen-practice-browser-id', trackingBrowserId);
+ }
+} catch { /* No stable browser storage: do not inflate unique-browser totals. */ trackingBrowserId = null; }
+let lastTrackingAttempt = 0, trackingPending = false, trackingQueued = false;
+async function trackPractice(force = false) {
+ if (!trackingBrowserId) return;
+ if (trackingPending) { if (force) trackingQueued = true; return; }
+ if (!force && Date.now() - lastTrackingAttempt < 60000) return;
+ lastTrackingAttempt = Date.now(); trackingPending = true;
+ const complete = name => (name === 'dll' ? dllProblems : darrayProblems).every((_,i) => (name === currentTopic ? completedProblems : topicStates[name]?.completedProblems || {})[i] === true);
+ try { await fetch('/api/track', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({browserId:trackingBrowserId,darray:complete('darray'),dll:complete('dll')}), keepalive:true }); }
+ catch { /* Tracking cannot interrupt practice. Retry on later activity. */ }
+ finally { trackingPending = false; if (trackingQueued) { trackingQueued = false; trackPractice(true); } }
+}
+const saveResultWithTracking = saveResultState;
+saveResultState = function() { saveResultWithTracking(); trackPractice(true); };
+for (const event of ['pointerdown','keydown']) document.addEventListener(event, () => trackPractice(), { passive:true });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) trackPractice(); });
+trackPractice(true);
+const trackingNote=document.createElement('div');trackingNote.className='save-notice';trackingNote.textContent='Anonymous visits and completion totals help improve this practice site.';document.querySelector('#results-panel').append(trackingNote);

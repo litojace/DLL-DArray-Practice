@@ -1,4 +1,5 @@
 const http = require('node:http');
+const { handleAnalytics } = require('./analytics');
 const { compile } = require('./grading');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -22,6 +23,7 @@ function json(res, status, value) {
 
 const server = http.createServer(async (req, res) => {
   const pathname = new URL(req.url, 'http://localhost').pathname;
+  if (await handleAnalytics(req, res, pathname)) return;
   if (pathname === '/health' && req.method === 'GET') return json(res, 200, { status: 'ok' });
   if (pathname === '/run' && req.method === 'POST') {
     let submission;
