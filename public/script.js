@@ -3176,3 +3176,26 @@ for (const event of ['pointerdown','keydown']) document.addEventListener(event, 
 document.addEventListener('visibilitychange', () => { if (!document.hidden) trackPractice(); });
 trackPractice(true);
 const trackingNote=document.createElement('div');trackingNote.className='save-notice';trackingNote.textContent='Anonymous visits and completion totals help improve this practice site.';document.querySelector('#results-panel').append(trackingNote);
+
+// Reset only the selected topic; historical teacher analytics remain cumulative.
+const clearTopicButton = document.getElementById('clear-topic');
+clearTopicButton.addEventListener('click', () => {
+ if (testsRunning) return;
+ const topicName = currentTopic === 'dll' ? 'Doubly Linked List' : 'DArray';
+ if (!window.confirm('Clear all saved code, test results, and completion progress for ' + topicName + '? This cannot be undone. The other topic will keep its work.')) return;
+ savedCode = {};
+ savedResults = {};
+ attemptedProblems = {};
+ completedProblems = {};
+ savedHintLevels = {};
+ openedHints = {};
+ celebrated[currentTopic] = false;
+ editor.setValue(starterCode());
+ topicStates[currentTopic] = { currentProblem, savedCode, savedResults, attemptedProblems, completedProblems, savedHintLevels, openedHints };
+ loadProblem();
+ persistWork();
+ editor.focus();
+});
+const controlsBeforeClear = updateControls;
+updateControls = function() { controlsBeforeClear(); clearTopicButton.disabled = testsRunning; };
+updateControls();
