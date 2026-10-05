@@ -1638,9 +1638,8 @@ async function runTests()
             !data.success
         )
         {
-            showCompileError(
-                data.error
-            );
+            if (data.errorType === 'service_unavailable') showGradingUnavailable();
+            else showCompileError(data.error);
 
             return;
         }
@@ -3140,3 +3139,13 @@ try{
 restoring=false;
 if(typeof editor.on==='function')editor.on('change',persistWork);else document.querySelector('#editor-section textarea')?.addEventListener('input',persistWork);
 window.addEventListener('pagehide',persistWork);document.addEventListener('visibilitychange',()=>{if(document.hidden)persistWork();});
+
+function showGradingUnavailable() {
+ results.classList.remove('running-results');
+ markTestsNotRun();
+ results.innerHTML = '<div class="error-card"><h3>Grading service temporarily unavailable</h3><p>The online compiler could not run your tests after retrying. Your code and completion progress have been kept.</p><p>Please try Run Tests again shortly.</p></div>';
+ saveResultState();
+ renderProblemProgress();
+}
+// A connection failure also leaves previously earned completion intact.
+showServerError = function() { showGradingUnavailable(); };

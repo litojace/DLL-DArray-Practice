@@ -1,4 +1,5 @@
 const http = require('node:http');
+const { compile } = require('./grading');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -42,22 +43,7 @@ const server = http.createServer(async (req, res) => {
       return json(res, 400, { success: false, error: 'Invalid problem or submission.' });
     }
     const source = topic.header + '\n' + topic.base + '\n#line 1 "submission.cpp"\n' + code + '\n#line 1 "grader.cpp"\n' + topic.graders[problem];
-    try {
-      const response = await fetch('https://wandbox.org/api/compile.json', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ compiler: 'gcc-13.2.0', code: source, options: 'warning,gnu++17', save: false }),
-        signal: AbortSignal.timeout(25000)
-      });
-      if (!response.ok) return json(res, 200, { success: false, error: 'The online compiler is busy. Please try again shortly.' });
-      const result = await response.json();
-      if (String(result.status) !== '0') {
-        return json(res, 200, { success: false, error: result.compiler_error || result.program_error || result.compiler_message || 'Compilation or execution failed.' });
-      }
-      return json(res, 200, { success: true, output: result.program_output || '' });
-    } catch {
-      return json(res, 200, { success: false, error: 'Could not reach the online compiler. Please try again.' });
-    }
+    return json(res, 200, await compile(source));
   }
   const asset = assets.get(pathname);
   if (asset && (req.method === 'GET' || req.method === 'HEAD')) {
