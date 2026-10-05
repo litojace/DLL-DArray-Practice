@@ -4356,3 +4356,7 @@ body.resizing-panels
 .clear-topic-button{color:#a14b4b;border-color:#e5caca;background:#fffafa}.clear-topic-button:hover:not(:disabled){background:#fff0f0;border-color:#d6abab}
 
 .topic-options{flex-wrap:wrap}.topic-badge{max-width:100%}@media(max-width:700px){.topbar{flex-wrap:wrap;gap:12px}.topic-switcher{width:100%}.topic-options label{flex:1;text-align:center}.topic-options span{white-space:normal}}
+
+/* Compact editor actions across all topics. */
+.editor-toolbar .run-button,.editor-toolbar .reset-button{min-height:40px;min-width:112px;padding:8px 14px;font-size:14px;border-radius:8px}
+.editor-toolbar .toolbar-actions{gap:10px}
