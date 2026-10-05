@@ -4336,3 +4336,10 @@ body.resizing-panels
 
 .brand-subtitle {font-size:13px;line-height:1.4;}
 @media(max-width:700px){.brand-subtitle{font-size:12px;}}
+
+.save-notice{padding:8px 18px 0;background:white;color:#60738e;font-size:12px}
+.completion-dialog{border:1px solid #d2dcfa;border-radius:20px;padding:32px;width:min(400px,calc(100vw - 64px));text-align:center;color:#14213d;box-shadow:0 20px 80px #14213d44;overflow:visible}
+.completion-dialog::backdrop{background:#101c3b88}.completion-dialog h2{font-size:28px;margin:12px 0}.completion-dialog p{font-size:16px;line-height:1.6}.completion-trophy{font-size:54px}.completion-dialog button{background:#657df1;color:white;border:0;padding:12px 20px;border-radius:9px;font-size:15px;cursor:pointer}
+.practice-confetti{position:absolute;inset:0;pointer-events:none}.practice-confetti i{position:absolute;top:-160px;width:8px;height:13px;animation:practice-confetti-fall 3s ease-in forwards;opacity:0}
+@keyframes practice-confetti-fall{0%{opacity:1;transform:translateY(0) rotate(0)}85%{opacity:1}100%{opacity:0;transform:translate(var(--drift),650px) rotate(700deg)}}
+@media(prefers-reduced-motion:reduce){.practice-confetti{display:none}}

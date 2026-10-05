@@ -52,3 +52,7 @@ The browser sends the chosen problem and student's code to `/run`. The server co
 Student code is sent to Wandbox; grading needs internet access and depends on that service's availability. CodeMirror is loaded from a CDN. On Render's free plan the service may sleep while idle, so the first request can take longer.
 
 Edit the frontend in `public/`. Problem descriptions and displayed cases are in `public/script.js`; keep those consistent with the corresponding C++ test harnesses in `graders/` when changing exercises. The original Site is unaffected by this export.
+
+## Student autosave
+
+Drafts, completion progress, hints, and the last selected topic/question save in localStorage on the same browser and website address. Clearing browser data removes them; they do not sync across devices or domains. A congratulations dialog with confetti appears once for each topic after all its questions are completed. Reduced-motion preferences disable confetti.

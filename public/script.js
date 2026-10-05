@@ -3103,3 +3103,40 @@ if (document.modelContext?.registerTool) {
   })).catch(console.error);
  } catch(error){console.error(error);}
 }
+
+// Save drafts and progress on this browser, and celebrate completion.
+const storageKey='jacen-cpp-practice-v1';
+let restoring=false, celebrated={};
+const notice=document.createElement('div'); notice.className='save-notice';notice.textContent='Work saves in this browser';document.querySelector('#editor-section').prepend(notice);
+function persistWork(){
+ if(restoring)return;
+ savedCode[currentProblem]=editor.getValue();
+ topicStates[currentTopic]={currentProblem,savedCode,completedProblems,attemptedProblems,savedHintLevels,openedHints};
+ const topics={};
+ for(const name of ['darray','dll']){const s=topicStates[name]||{};topics[name]={currentProblem:s.currentProblem||0,savedCode:s.savedCode||{},completedProblems:s.completedProblems||{},attemptedProblems:s.attemptedProblems||{},savedHintLevels:s.savedHintLevels||{},openedHints:s.openedHints||{}};}
+ try{localStorage.setItem(storageKey,JSON.stringify({version:1,topic:currentTopic,topics,celebrated}));notice.textContent='Saved in this browser';}catch{notice.textContent='Browser saving unavailable';}
+}
+function celebrateAll(){
+ const done=problems.every((_,i)=>completedProblems[i]===true);
+ if(!done||celebrated[currentTopic])return;celebrated[currentTopic]=true;persistWork();
+ const dialog=document.createElement('dialog');dialog.className='completion-dialog';dialog.setAttribute('aria-labelledby','completion-title');
+ const topicName=currentTopic==='dll'?'Doubly Linked List':'DArray';
+ dialog.innerHTML='<div class="completion-trophy" aria-hidden="true">🏆</div><h2 id="completion-title">Congratulations!</h2><p>You completed every '+topicName+' question.<br>Great work!</p><button type="button">Keep practicing</button>';
+ document.body.append(dialog);dialog.querySelector('button').onclick=()=>dialog.close();dialog.addEventListener('close',()=>dialog.remove(),{once:true});dialog.showModal();
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const confetti=document.createElement('div');confetti.className='practice-confetti';confetti.setAttribute('aria-hidden','true');for(let i=0;i<70;i++){const el=document.createElement('i');el.style.left=Math.random()*100+'%';el.style.background=['#7891ff','#ffc857','#62be91','#ef83bb'][i%4];el.style.animationDelay=Math.random()*.8+'s';el.style.setProperty('--drift',(Math.random()*200-100)+'px');confetti.append(el);}dialog.append(confetti);setTimeout(()=>confetti.remove(),4200);}
+}
+const previousLoad=loadProblem;loadProblem=function(){previousLoad();persistWork();};
+const previousSaveResult=saveResultState;saveResultState=function(){previousSaveResult();persistWork();celebrateAll();};
+const previousProgress=renderProblemProgress;renderProblemProgress=function(){previousProgress();persistWork();};
+restoring=true;
+try{
+ const snapshot=JSON.parse(localStorage.getItem(storageKey)||'null');
+ if(snapshot?.version===1&&snapshot.topics){const states={};
+ for(const name of ['darray','dll']){const raw=snapshot.topics[name]||{},list=name==='dll'?dllProblems:darrayProblems;const state={currentProblem:Number.isInteger(raw.currentProblem)&&raw.currentProblem>=0&&raw.currentProblem<list.length?raw.currentProblem:0};
+ for(const key of ['savedCode','completedProblems','attemptedProblems','savedHintLevels','openedHints']){state[key]={};list.forEach((_,i)=>{const v=raw[key]?.[i];if(key==='savedCode'?typeof v==='string'&&v.length<=20000:key==='savedHintLevels'?Number.isInteger(v)&&v>=0&&v<=3:typeof v==='boolean')state[key][i]=v;});}states[name]=state;topicStates[name]=state;}
+ celebrated={darray:snapshot.celebrated===true||snapshot.celebrated?.darray===true,dll:snapshot.celebrated===true||snapshot.celebrated?.dll===true};const target=snapshot.topic==='dll'?'dll':'darray';currentTopic=target==='dll'?'darray':'dll';switchTopic(target);for(const name of ['darray','dll'])topicStates[name]=states[name];notice.textContent='Restored work from this browser';
+ }
+}catch{notice.textContent='Browser saving unavailable';}
+restoring=false;
+if(typeof editor.on==='function')editor.on('change',persistWork);else document.querySelector('#editor-section textarea')?.addEventListener('input',persistWork);
+window.addEventListener('pagehide',persistWork);document.addEventListener('visibilitychange',()=>{if(document.hidden)persistWork();});
