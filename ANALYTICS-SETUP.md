@@ -54,3 +54,7 @@ Existing saved completion progress is counted when students revisit after tracki
 Without environment settings, practice still works and the dashboard explains that configuration is missing. Database outages do not block grading or autosave. Activity missed during an outage is not counted retroactively; completion totals are retried on later activity.
 
 The SQL enables Row Level Security and denies anonymous access. Only the server's secret key can invoke the tracking functions. Supabase's free plan has usage limits and may pause inactive projects; check its dashboard if totals stop updating.
+
+## Existing project: add Singly Linked List tracking
+
+Before deploying this update, run supabase/add-sll.sql in the Supabase SQL Editor. Existing visits and completion totals are preserved. The dashboard adds SLL and all-three-topic totals, while retaining the original DArray + DLL count. No environment variable changes are needed.

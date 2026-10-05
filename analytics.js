@@ -70,10 +70,10 @@ async function handleAnalytics(req, res, pathname) {
   let body = '', length = 0;
   for await (const chunk of req) { length += chunk.length; if (length > 1024) { send(res, 413, { error: 'Request too large' }); return true; } body += chunk.toString(); }
   const data = JSON.parse(body);
-  if (!data || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(data.browserId || '') || typeof data.darray !== 'boolean' || typeof data.dll !== 'boolean') {
+  if (!data || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(data.browserId || '') || typeof data.darray !== 'boolean' || typeof data.dll !== 'boolean' || (data.sll !== undefined && typeof data.sll !== 'boolean')) {
    send(res, 400, { error: 'Invalid activity' }); return true;
   }
-  await rpc('record_practice_activity', { p_browser_id: data.browserId, p_darray: data.darray, p_dll: data.dll });
+  await rpc('record_practice_activity_v2', { p_browser_id: data.browserId, p_darray: data.darray, p_dll: data.dll, p_sll: data.sll === true });
   send(res, 200, { recorded: true });
  } catch (error) { send(res, error instanceof SyntaxError ? 400 : 503, { error: error instanceof SyntaxError ? 'Invalid activity' : 'Tracking unavailable' }); }
  return true;

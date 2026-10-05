@@ -6,6 +6,7 @@ const path = require('node:path');
 
 const read = file => fs.readFileSync(path.join(__dirname, file), 'utf8');
 const topics = [
+  { header: read('cpp/AnyList.h'), base: read('cpp/AnyList.cpp'), graders: JSON.parse(read('graders/sll.json')) },
   { header: read('cpp/DArray.h'), base: read('cpp/DArray.cpp'), graders: JSON.parse(read('graders/darray.json')) },
   { header: read('cpp/DoublyList.h'), base: read('cpp/DoublyList.cpp'), graders: JSON.parse(read('graders/dll.json')) }
 ];
@@ -44,7 +45,7 @@ const server = http.createServer(async (req, res) => {
     if (!topic || typeof code !== 'string' || code.length > 20000) {
       return json(res, 400, { success: false, error: 'Invalid problem or submission.' });
     }
-    const source = topic.header + '\n' + topic.base + '\n#line 1 "submission.cpp"\n' + code + '\n#line 1 "grader.cpp"\n' + topic.graders[problem];
+    const source = topic.header + '\n' + (problem === 'sll_6_insertFront' ? topic.base.replace(/void AnyList::insertFront\(int newData\)\s*\{[^}]*\}/, '') : topic.base) + '\n#line 1 "submission.cpp"\n' + code + '\n#line 1 "grader.cpp"\n' + topic.graders[problem];
     return json(res, 200, await compile(source));
   }
   const asset = assets.get(pathname);

@@ -60,3 +60,7 @@ Drafts, completion progress, hints, and the last selected topic/question save in
 ## Teacher analytics
 
 Visit /teacher for a password-protected usage dashboard. Shared tracking requires Supabase and server environment variables; see ANALYTICS-SETUP.md. Without configuration the practice website remains usable.
+
+## Singly Linked List practice
+
+The third topic uses the supplied AnyList and Node classes, with 20 exercises and five nonnegative test cases per exercise. Compilation adds exercise declarations and a friend grader internally. The Insert Front exercise replaces the supplied implementation for that submission. For an existing Supabase project, run supabase/add-sll.sql before deploying to enable the new tracking totals.
