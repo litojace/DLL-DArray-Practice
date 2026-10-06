@@ -2240,7 +2240,7 @@ function formatActual(
     problemId
 )
 {
-    if (problemId.startsWith("dll_")) return actual.trim();
+    if (problemId.startsWith("dll_") || problemId.startsWith("sll_")) return actual.trim();
     const cleaned =
         actual.trim();
 
